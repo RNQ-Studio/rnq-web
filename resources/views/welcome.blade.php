@@ -1,484 +1,686 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="id">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Laravel Starter') }} — API Backend & Back-office</title>
-    <meta name="description" content="Starter project berbasis Laravel + PostgreSQL sebagai fondasi API backend untuk Flutter dan back-office web UI dengan Filament. Siap dikembangkan, tanpa over-engineering.">
+    <title>RNQ Studio — Jasa Development Web, Mobile & IoT</title>
+    <meta name="description" content="Partner pengembangan sistem end-to-end untuk web, aplikasi Android & iOS, serta IoT. Dari strategi, desain, development, hingga sistem siap bertumbuh.">
+    <meta name="theme-color" content="#07111f">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url('/') }}">
 
-    {{-- Favicons and Apple Touch Icon --}}
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="RNQ Studio">
+    <meta property="og:title" content="RNQ Studio — Build the System Behind Your Next Move">
+    <meta property="og:description" content="Web, mobile, and IoT systems engineered around real business outcomes.">
+    <meta property="og:url" content="{{ url('/') }}">
+    <meta property="og:image" content="{{ rtrim(request()->root(), '/') }}/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="RNQ Studio — Web, Mobile, IoT. Engineered for impact.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="RNQ Studio — Web, Mobile & IoT Development">
+    <meta name="twitter:description" content="One technology partner from product strategy to launch and beyond.">
+    <meta name="twitter:image" content="{{ rtrim(request()->root(), '/') }}/og.png">
+
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ asset('apple-touch-icon-precomposed.png') }}">
     <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
-    <meta name="theme-color" content="#2563eb">
 
-    {{-- Project fonts (Instrument Sans via Bunny) --}}
     @fonts
 
-    {{-- Styles / Scripts --}}
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
-
-    {{-- x-cloak must be in <head> so Alpine elements are hidden before Alpine loads --}}
-    <style>
-        [x-cloak] { display: none !important; }
-
-        /* Smooth scroll */
-        html { scroll-behavior: smooth; }
-
-        /* Fade-in animation */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fade-in-up {
-            animation: fadeInUp 0.7s ease-out both;
-        }
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-
-        /* Feature card hover lift */
-        .feature-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px -8px rgba(37, 99, 235, 0.12), 0 4px 12px -4px rgba(0, 0, 0, 0.06);
-        }
-    </style>
 </head>
-<body class="bg-white text-gray-900 antialiased" x-data="{ mobileMenu: false }">
+<body>
+    <a class="skip-link" href="#main-content" data-i18n="accessibility.skip">Lewati ke konten utama</a>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="page-noise" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
 
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    {{-- NAVBAR                                                        --}}
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
-        <div class="mx-auto max-w-6xl px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                {{-- Logo / Brand --}}
-                <a href="/" class="flex items-center gap-2.5 group">
-                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 shadow-sm transition-shadow group-hover:shadow-md">
-                        <svg class="h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
-                        </svg>
+    <header class="site-header" data-header>
+        <div class="nav-shell">
+            <a class="brand" href="#top" aria-label="RNQ Studio — Home">
+                <span class="brand-mark">
+                    <img src="{{ asset('images/logo-dark.svg') }}" alt="" width="42" height="42">
+                </span>
+                <span class="brand-copy">
+                    <strong>RNQ</strong>
+                    <span>STUDIO</span>
+                </span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Navigasi utama">
+                <a href="#services" data-i18n="nav.services">Layanan</a>
+                <a href="#solutions" data-i18n="nav.solutions">Solusi</a>
+                <a href="#process" data-i18n="nav.process">Proses</a>
+                <a href="#why-us" data-i18n="nav.why">Mengapa RNQ</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+
+            <div class="nav-actions">
+                <div class="language-switch" role="group" aria-label="Pilih bahasa">
+                    <button type="button" class="is-active" data-language="id" aria-pressed="true">ID</button>
+                    <span aria-hidden="true"></span>
+                    <button type="button" data-language="en" aria-pressed="false">EN</button>
+                </div>
+                <a class="button button-small button-light nav-cta"
+                   href="https://wa.me/6281818173095?text=Halo%20RNQ%20Studio%2C%20saya%20ingin%20konsultasi%20tentang%20pengembangan%20sistem."
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-whatsapp
+                   data-i18n="nav.contact">Mulai Konsultasi</a>
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+                    <span></span><span></span>
+                    <span class="sr-only" data-i18n="accessibility.menu">Buka menu</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
+            <nav aria-label="Navigasi mobile">
+                <a href="#services" data-i18n="nav.services">Layanan</a>
+                <a href="#solutions" data-i18n="nav.solutions">Solusi</a>
+                <a href="#process" data-i18n="nav.process">Proses</a>
+                <a href="#why-us" data-i18n="nav.why">Mengapa RNQ</a>
+                <a href="#faq">FAQ</a>
+                <a class="button button-primary"
+                   href="https://wa.me/6281818173095?text=Halo%20RNQ%20Studio%2C%20saya%20ingin%20konsultasi%20tentang%20pengembangan%20sistem."
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-whatsapp
+                   data-i18n="nav.contact">Mulai Konsultasi</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <section class="hero" id="top">
+            <div class="hero-grid" aria-hidden="true"></div>
+            <div class="hero-orb hero-orb-one" aria-hidden="true"></div>
+            <div class="hero-orb hero-orb-two" aria-hidden="true"></div>
+
+            <div class="container hero-layout">
+                <div class="hero-copy">
+                    <div class="eyebrow reveal">
+                        <span class="status-dot"></span>
+                        <span data-i18n="hero.eyebrow">Berpengalaman sejak 2016 • Ratusan proyek terselesaikan</span>
                     </div>
-                    <span class="text-lg font-bold tracking-tight text-gray-900">Laravel Starter</span>
-                </a>
 
-                {{-- Desktop nav links --}}
-                <div class="hidden items-center gap-2 md:flex">
-                    <a href="#features" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600">Fitur</a>
-                    <a href="#quickstart" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600">Quick Start</a>
-                    <a href="/articles" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600">Berita AI</a>
-                    <a href="/docs/api" class="rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600">API Docs</a>
-                    <a href="/admin" class="ml-1 inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md">
-                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
-                        </svg>
-                        Admin Panel
+                    <h1 class="reveal reveal-delay-1">
+                        <span data-i18n="hero.titleLead">Sistem digital yang</span>
+                        <span class="text-gradient" data-i18n="hero.titleAccent">dirancang tepat.</span>
+                        <span data-i18n="hero.titleEnd">Dibangun untuk tumbuh.</span>
+                    </h1>
+
+                    <p class="hero-description reveal reveal-delay-2" data-i18n="hero.description">
+                        Kami membantu bisnis mengubah proses rumit menjadi produk digital yang terhubung—mulai dari web, aplikasi Android &amp; iOS, hingga perangkat IoT. Satu partner dari ide sampai sistem bekerja di dunia nyata.
+                    </p>
+
+                    <div class="hero-actions reveal reveal-delay-3">
+                        <a class="button button-primary magnetic"
+                           href="https://wa.me/6281818173095?text=Halo%20RNQ%20Studio%2C%20saya%20ingin%20konsultasi%20tentang%20pengembangan%20sistem."
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           data-whatsapp>
+                            <span data-i18n="hero.primaryCta">Ceritakan Kebutuhan Anda</span>
+                            <span class="button-arrow" aria-hidden="true">↗</span>
+                        </a>
+                        <a class="button button-ghost" href="#services">
+                            <span data-i18n="hero.secondaryCta">Jelajahi Layanan</span>
+                            <span class="button-arrow" aria-hidden="true">↓</span>
+                        </a>
+                    </div>
+
+                    <div class="hero-proof reveal reveal-delay-4">
+                        <div class="proof-line" aria-hidden="true"></div>
+                        <p data-i18n="hero.proof">Web • Mobile • IoT. Satu partner, satu arah.</p>
+                    </div>
+                </div>
+
+                <div class="hero-visual reveal reveal-delay-2" data-hero-visual>
+                    <div class="system-window" data-tilt>
+                        <div class="window-bar">
+                            <div class="window-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+                            <span data-i18n="visual.title">BLUEPRINT SISTEM</span>
+                            <span class="window-status"><i></i><b data-i18n="visual.online">AKTIF</b></span>
+                        </div>
+
+                        <div class="system-canvas">
+                            <div class="canvas-grid" aria-hidden="true"></div>
+                            <div class="signal-ring signal-ring-one" aria-hidden="true"></div>
+                            <div class="signal-ring signal-ring-two" aria-hidden="true"></div>
+
+                            <div class="connector connector-top" aria-hidden="true"><i></i></div>
+                            <div class="connector connector-right" aria-hidden="true"><i></i></div>
+                            <div class="connector connector-bottom" aria-hidden="true"><i></i></div>
+                            <div class="connector connector-left" aria-hidden="true"><i></i></div>
+
+                            <div class="system-core">
+                                <span class="core-pulse" aria-hidden="true"></span>
+                                <small data-i18n="visual.coreLabel">BISNIS ANDA</small>
+                                <strong data-i18n="visual.coreTitle">Satu Ekosistem</strong>
+                                <span data-i18n="visual.coreText">Terhubung &amp; terukur</span>
+                            </div>
+
+                            <div class="system-node node-web">
+                                <i class="node-icon icon-browser" aria-hidden="true"></i>
+                                <span>WEB</span>
+                                <b data-i18n="visual.nodeReady">READY</b>
+                            </div>
+                            <div class="system-node node-mobile">
+                                <i class="node-icon icon-phone" aria-hidden="true"></i>
+                                <span>MOBILE</span>
+                                <b data-i18n="visual.nodeReady">READY</b>
+                            </div>
+                            <div class="system-node node-iot">
+                                <i class="node-icon icon-signal" aria-hidden="true"></i>
+                                <span>IoT</span>
+                                <b data-i18n="visual.nodeReady">READY</b>
+                            </div>
+                            <div class="system-node node-cloud">
+                                <i class="node-icon icon-cloud" aria-hidden="true"></i>
+                                <span>CLOUD</span>
+                                <b data-i18n="visual.nodeReady">READY</b>
+                            </div>
+
+                            <div class="metric-card metric-card-top">
+                                <span data-i18n="visual.architecture">ARSITEKTUR</span>
+                                <strong data-i18n="visual.scalable">Scalable</strong>
+                            </div>
+                            <div class="metric-card metric-card-bottom">
+                                <div class="metric-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+                                <span data-i18n="visual.liveData">LIVE DATA</span>
+                            </div>
+                        </div>
+
+                        <div class="window-footer">
+                            <span><i></i> RNQ / SYSTEM_01</span>
+                            <code data-system-message>strategy → design → engineering → impact</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stack-strip" aria-label="Teknologi yang kami gunakan">
+                <div class="stack-track">
+                    @foreach (['LARAVEL', 'REACT', 'FLUTTER', 'SWIFT', 'KOTLIN', 'NODE.JS', 'POSTGRESQL', 'CLOUD', 'MQTT', 'REST API', 'LARAVEL', 'REACT', 'FLUTTER', 'SWIFT', 'KOTLIN', 'NODE.JS', 'POSTGRESQL', 'CLOUD', 'MQTT', 'REST API'] as $tech)
+                        <span>{{ $tech }} <i></i></span>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        <section class="section intro-section">
+            <div class="container intro-grid">
+                <div class="section-kicker reveal">
+                    <span>01</span>
+                    <p data-i18n="intro.kicker">YANG KAMI PECAHKAN</p>
+                </div>
+                <div class="intro-copy">
+                    <h2 class="display-title reveal">
+                        <span data-i18n="intro.titleLead">Bukan sekadar aplikasi.</span>
+                        <em data-i18n="intro.titleAccent">Sistem yang menggerakkan bisnis.</em>
+                    </h2>
+                    <div class="intro-detail reveal">
+                        <p data-i18n="intro.description">Teknologi seharusnya mempersingkat alur kerja, membuka visibilitas, dan menciptakan pengalaman yang lebih baik—bukan menambah kompleksitas baru. Kami mulai dari tujuan bisnis, lalu merancang sistem yang paling masuk akal untuk mencapainya.</p>
+                        <a href="#process" class="text-link">
+                            <span data-i18n="intro.link">Lihat cara kami bekerja</span>
+                            <span aria-hidden="true">↘</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="credibility-section" aria-label="Pengalaman RNQ Studio">
+            <div class="container credibility-grid">
+                <article class="credibility-intro reveal">
+                    <span data-i18n="credibility.kicker">REKAM JEJAK</span>
+                    <p data-i18n="credibility.statement">Pengalaman panjang membuat kami tahu kapan harus bergerak cepat, kapan harus menggali lebih dalam, dan detail mana yang tidak boleh dikompromikan.</p>
+                </article>
+                <article class="credibility-stat reveal">
+                    <strong>2016</strong>
+                    <p data-i18n="credibility.since">Tahun kami mulai membantu bisnis membangun sistem digital.</p>
+                </article>
+                <article class="credibility-stat reveal">
+                    <strong data-i18n="credibility.hundreds">Ratusan</strong>
+                    <p data-i18n="credibility.projects">Proyek telah diselesaikan lintas kebutuhan dan kompleksitas.</p>
+                </article>
+                <article class="credibility-stat credibility-stat-accent reveal">
+                    <strong>Q × S</strong>
+                    <p data-i18n="credibility.standard">Quality × Speed. Dua standar kerja, bukan pilihan salah satu.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section services-section" id="services">
+            <div class="container">
+                <div class="section-heading">
+                    <div class="section-kicker reveal">
+                        <span>02</span>
+                        <p data-i18n="services.kicker">LAYANAN INTI</p>
+                    </div>
+                    <div class="heading-row">
+                        <h2 class="display-title reveal" data-i18n="services.title">Dari layar hingga perangkat. Kami bangun sebagai satu kesatuan.</h2>
+                        <p class="heading-copy reveal" data-i18n="services.description">Pilih satu layanan atau bentuk tim end-to-end. Arsitektur, pengalaman pengguna, dan kebutuhan operasional tetap bergerak dalam satu arah.</p>
+                    </div>
+                </div>
+
+                <div class="service-grid">
+                    <article class="service-card service-card-featured reveal" data-tilt>
+                        <div class="card-topline">
+                            <span>01 / WEB</span>
+                            <i aria-hidden="true">↗</i>
+                        </div>
+                        <div class="service-symbol symbol-web" aria-hidden="true">
+                            <div><i></i><i></i><i></i></div>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="service-content">
+                            <h3 data-i18n="services.webTitle">Web System Development</h3>
+                            <p data-i18n="services.webText">Platform web yang cepat, aman, dan mudah dikembangkan—dari website korporat hingga sistem operasional kompleks.</p>
+                            <ul>
+                                <li data-i18n="services.webItem1">Dashboard &amp; internal tools</li>
+                                <li data-i18n="services.webItem2">SaaS, portal &amp; marketplace</li>
+                                <li data-i18n="services.webItem3">API &amp; integrasi sistem</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" data-tilt>
+                        <div class="card-topline">
+                            <span>02 / MOBILE</span>
+                            <i aria-hidden="true">↗</i>
+                        </div>
+                        <div class="service-symbol symbol-mobile" aria-hidden="true">
+                            <div class="phone-one"><i></i><span></span><span></span></div>
+                            <div class="phone-two"><i></i><span></span><span></span></div>
+                        </div>
+                        <div class="service-content">
+                            <h3 data-i18n="services.mobileTitle">Android &amp; iOS Apps</h3>
+                            <p data-i18n="services.mobileText">Aplikasi mobile yang intuitif, stabil, dan siap dipakai pengguna di lapangan maupun pasar konsumen.</p>
+                            <ul>
+                                <li data-i18n="services.mobileItem1">Native &amp; cross-platform</li>
+                                <li data-i18n="services.mobileItem2">Offline-first &amp; real-time</li>
+                                <li data-i18n="services.mobileItem3">Rilis Play Store &amp; App Store</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" data-tilt>
+                        <div class="card-topline">
+                            <span>03 / IoT</span>
+                            <i aria-hidden="true">↗</i>
+                        </div>
+                        <div class="service-symbol symbol-iot" aria-hidden="true">
+                            <div class="iot-center"></div>
+                            <div class="iot-orbit orbit-one"><i></i></div>
+                            <div class="iot-orbit orbit-two"><i></i></div>
+                            <span class="iot-wave wave-one"></span>
+                            <span class="iot-wave wave-two"></span>
+                        </div>
+                        <div class="service-content">
+                            <h3 data-i18n="services.iotTitle">IoT &amp; Connected Devices</h3>
+                            <p data-i18n="services.iotText">Hubungkan sensor, mesin, dan perangkat ke dashboard yang memberi data serta kontrol saat dibutuhkan.</p>
+                            <ul>
+                                <li data-i18n="services.iotItem1">Monitoring &amp; telemetry</li>
+                                <li data-i18n="services.iotItem2">Remote control &amp; alert</li>
+                                <li data-i18n="services.iotItem3">Device–cloud integration</li>
+                            </ul>
+                        </div>
+                    </article>
+
+                    <article class="service-card reveal" data-tilt>
+                        <div class="card-topline">
+                            <span>04 / SCALE</span>
+                            <i aria-hidden="true">↗</i>
+                        </div>
+                        <div class="service-symbol symbol-scale" aria-hidden="true">
+                            <span><i></i><b></b></span>
+                            <span><i></i><b></b></span>
+                            <span><i></i><b></b></span>
+                        </div>
+                        <div class="service-content">
+                            <h3 data-i18n="services.scaleTitle">Modernization &amp; Scale</h3>
+                            <p data-i18n="services.scaleText">Rapikan sistem lama, tingkatkan performa, dan siapkan fondasi teknis yang mengikuti pertumbuhan bisnis.</p>
+                            <ul>
+                                <li data-i18n="services.scaleItem1">Audit &amp; architecture review</li>
+                                <li data-i18n="services.scaleItem2">Legacy system modernization</li>
+                                <li data-i18n="services.scaleItem3">Cloud, security &amp; automation</li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section solutions-section" id="solutions">
+            <div class="solutions-orb" aria-hidden="true"></div>
+            <div class="container">
+                <div class="section-kicker section-kicker-light reveal">
+                    <span>03</span>
+                    <p data-i18n="solutions.kicker">YANG BISA KITA BANGUN</p>
+                </div>
+                <div class="solutions-heading">
+                    <h2 class="display-title reveal" data-i18n="solutions.title">Satu fondasi. Banyak kemungkinan.</h2>
+                    <p class="reveal" data-i18n="solutions.description">Kami menyusun solusi sesuai konteks bisnis Anda—bukan memaksakan produk yang sama untuk semua orang.</p>
+                </div>
+
+                <div class="solution-list">
+                    <article class="solution-item reveal">
+                        <div class="solution-number">01</div>
+                        <div class="solution-title">
+                            <span data-i18n="solutions.opsLabel">OPERATIONS</span>
+                            <h3 data-i18n="solutions.opsTitle">Platform Operasional</h3>
+                        </div>
+                        <p data-i18n="solutions.opsText">Satukan workflow, approval, dashboard, laporan, dan integrasi agar tim bergerak lebih cepat dengan data yang sama.</p>
+                        <div class="solution-tags">
+                            <span>ERP</span><span>CRM</span><span>WORKFLOW</span><span>ANALYTICS</span>
+                        </div>
+                        <div class="solution-arrow" aria-hidden="true">↗</div>
+                    </article>
+                    <article class="solution-item reveal">
+                        <div class="solution-number">02</div>
+                        <div class="solution-title">
+                            <span data-i18n="solutions.customerLabel">CUSTOMER EXPERIENCE</span>
+                            <h3 data-i18n="solutions.customerTitle">Produk Digital Pelanggan</h3>
+                        </div>
+                        <p data-i18n="solutions.customerText">Bangun pengalaman dari onboarding hingga transaksi yang terasa sederhana bagi pengguna dan terukur bagi bisnis.</p>
+                        <div class="solution-tags">
+                            <span>MOBILE APP</span><span>PORTAL</span><span>LOYALTY</span><span>COMMERCE</span>
+                        </div>
+                        <div class="solution-arrow" aria-hidden="true">↗</div>
+                    </article>
+                    <article class="solution-item reveal">
+                        <div class="solution-number">03</div>
+                        <div class="solution-title">
+                            <span data-i18n="solutions.connectedLabel">CONNECTED WORLD</span>
+                            <h3 data-i18n="solutions.connectedTitle">Ekosistem IoT</h3>
+                        </div>
+                        <p data-i18n="solutions.connectedText">Jadikan data perangkat sebagai keputusan: pantau kondisi, kirim peringatan, kendalikan aset, dan temukan pola secara real-time.</p>
+                        <div class="solution-tags">
+                            <span>SENSOR</span><span>MQTT</span><span>CONTROL</span><span>TELEMETRY</span>
+                        </div>
+                        <div class="solution-arrow" aria-hidden="true">↗</div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section process-section" id="process">
+            <div class="container">
+                <div class="process-heading">
+                    <div class="section-kicker reveal">
+                        <span>04</span>
+                        <p data-i18n="process.kicker">PROSES KERJA</p>
+                    </div>
+                    <h2 class="display-title reveal" data-i18n="process.title">Jelas dari awal. Kolaboratif sampai akhir.</h2>
+                    <p class="reveal" data-i18n="process.description">Anda selalu tahu apa yang sedang dibangun, mengapa keputusan dibuat, dan apa langkah berikutnya.</p>
+                </div>
+
+                <div class="process-track">
+                    <div class="process-line" aria-hidden="true"><span></span></div>
+                    <article class="process-step reveal">
+                        <div class="process-marker"><span>01</span></div>
+                        <div>
+                            <small data-i18n="process.step1Label">DISCOVER</small>
+                            <h3 data-i18n="process.step1Title">Pahami masalahnya</h3>
+                            <p data-i18n="process.step1Text">Kami petakan tujuan, pengguna, alur kerja, risiko, dan definisi sukses sebelum bicara fitur.</p>
+                        </div>
+                    </article>
+                    <article class="process-step reveal">
+                        <div class="process-marker"><span>02</span></div>
+                        <div>
+                            <small data-i18n="process.step2Label">BLUEPRINT</small>
+                            <h3 data-i18n="process.step2Title">Rancang jalur terbaik</h3>
+                            <p data-i18n="process.step2Text">Solusi, prioritas, arsitektur, pengalaman pengguna, timeline, dan scope dibuat transparan.</p>
+                        </div>
+                    </article>
+                    <article class="process-step reveal">
+                        <div class="process-marker"><span>03</span></div>
+                        <div>
+                            <small data-i18n="process.step3Label">BUILD</small>
+                            <h3 data-i18n="process.step3Title">Bangun dalam sprint</h3>
+                            <p data-i18n="process.step3Text">Progress hadir bertahap dan dapat ditinjau, sehingga feedback masuk sebelum keputusan menjadi mahal.</p>
+                        </div>
+                    </article>
+                    <article class="process-step reveal">
+                        <div class="process-marker"><span>04</span></div>
+                        <div>
+                            <small data-i18n="process.step4Label">VERIFY</small>
+                            <h3 data-i18n="process.step4Title">Uji yang penting</h3>
+                            <p data-i18n="process.step4Text">Fungsi, keamanan, performa, dan pengalaman penggunaan diperiksa di skenario nyata.</p>
+                        </div>
+                    </article>
+                    <article class="process-step reveal">
+                        <div class="process-marker"><span>05</span></div>
+                        <div>
+                            <small data-i18n="process.step5Label">EVOLVE</small>
+                            <h3 data-i18n="process.step5Title">Luncurkan &amp; kembangkan</h3>
+                            <p data-i18n="process.step5Text">Kami bantu go-live, transfer knowledge, pemantauan, serta iterasi berdasarkan data dan kebutuhan baru.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section why-section" id="why-us">
+            <div class="container">
+                <div class="section-kicker reveal">
+                    <span>05</span>
+                    <p data-i18n="why.kicker">MENGAPA RNQ STUDIO</p>
+                </div>
+                <div class="heading-row why-heading">
+                    <h2 class="display-title reveal" data-i18n="why.title">Bukan vendor yang hanya menerima brief.</h2>
+                    <p class="heading-copy reveal" data-i18n="why.description">Kami hadir sebagai partner berpikir dan partner eksekusi—menantang asumsi, menjaga prioritas, lalu menuntaskan detail teknisnya.</p>
+                </div>
+
+                <div class="why-grid">
+                    <article class="why-card why-card-wide reveal">
+                        <div class="why-index">01</div>
+                        <div class="why-visual visual-ownership" aria-hidden="true">
+                            <div class="code-panel">
+                                <span><i></i><i></i><i></i></span>
+                                <p></p><p></p><p></p><p></p>
+                            </div>
+                            <div class="key-chip">YOUR CODE</div>
+                        </div>
+                        <div>
+                            <span class="card-label" data-i18n="why.ownershipLabel">OWNERSHIP</span>
+                            <h3 data-i18n="why.ownershipTitle">Sistem Anda tetap milik Anda.</h3>
+                            <p data-i18n="why.ownershipText">Source code, dokumentasi, dan pengetahuan tidak dikunci. Tim Anda dapat melanjutkan, mengaudit, dan mengembangkan dengan percaya diri.</p>
+                        </div>
+                    </article>
+
+                    <article class="why-card reveal">
+                        <div class="why-index">02</div>
+                        <div class="why-visual visual-architecture" aria-hidden="true">
+                            <span></span><span></span><span></span>
+                            <i></i><i></i><i></i>
+                        </div>
+                        <div>
+                            <span class="card-label" data-i18n="why.archLabel">ENGINEERING</span>
+                            <h3 data-i18n="why.archTitle">Fondasi yang siap berubah.</h3>
+                            <p data-i18n="why.archText">Arsitektur disusun agar fitur, pengguna, data, dan integrasi baru dapat tumbuh tanpa membangun ulang semuanya.</p>
+                        </div>
+                    </article>
+
+                    <article class="why-card reveal">
+                        <div class="why-index">03</div>
+                        <div class="why-visual visual-clarity" aria-hidden="true">
+                            <div><span>SPRINT 04</span><b>72%</b></div>
+                            <i><b></b></i>
+                            <p><span></span><span></span><span></span></p>
+                        </div>
+                        <div>
+                            <span class="card-label" data-i18n="why.clarityLabel">CLARITY</span>
+                            <h3 data-i18n="why.clarityTitle">Progress tanpa kotak hitam.</h3>
+                            <p data-i18n="why.clarityText">Scope, keputusan, risiko, dan perkembangan dibuka secara berkala. Tidak perlu menunggu berbulan-bulan untuk melihat hasil.</p>
+                        </div>
+                    </article>
+
+                    <article class="why-card why-card-wide why-card-dark reveal">
+                        <div class="why-index">04</div>
+                        <div class="why-visual visual-quality" aria-hidden="true">
+                            <div class="quality-radar">
+                                <i></i><i></i><i></i>
+                                <span>✓</span>
+                            </div>
+                            <div class="quality-list">
+                                <span><i></i> SECURITY</span>
+                                <span><i></i> PERFORMANCE</span>
+                                <span><i></i> TESTABILITY</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="card-label" data-i18n="why.qualityLabel">QUALITY</span>
+                            <h3 data-i18n="why.qualityTitle">Kualitas bukan tahap terakhir.</h3>
+                            <p data-i18n="why.qualityText">Keamanan, performa, maintainability, dan monitoring dipikirkan sejak desain—bukan ditempel setelah sistem selesai.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section faq-section" id="faq">
+            <div class="container faq-layout">
+                <div class="faq-intro">
+                    <div class="section-kicker reveal">
+                        <span>06</span>
+                        <p>FAQ</p>
+                    </div>
+                    <h2 class="display-title reveal" data-i18n="faq.title">Sebelum kita mulai.</h2>
+                    <p class="reveal" data-i18n="faq.description">Beberapa jawaban singkat untuk hal yang paling sering menjadi pertimbangan sebelum memulai proyek digital.</p>
+                    <a class="text-link reveal"
+                       href="https://wa.me/6281818173095?text=Halo%20RNQ%20Studio%2C%20saya%20punya%20pertanyaan%20tentang%20pengembangan%20sistem."
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       data-whatsapp>
+                        <span data-i18n="faq.more">Masih punya pertanyaan?</span>
+                        <span aria-hidden="true">↗</span>
                     </a>
                 </div>
 
-                {{-- Mobile hamburger --}}
-                <button @click="mobileMenu = !mobileMenu" class="rounded-lg p-2 text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900 md:hidden" aria-label="Toggle menu">
-                    <svg x-show="!mobileMenu" class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                    <svg x-show="mobileMenu" x-cloak class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-                    </svg>
-                </button>
+                <div class="faq-list">
+                    <details class="faq-item reveal">
+                        <summary>
+                            <span data-i18n="faq.q1">Apakah bisa mulai dari ide yang belum matang?</span>
+                            <i aria-hidden="true"></i>
+                        </summary>
+                        <div><p data-i18n="faq.a1">Bisa. Tahap discovery memang dirancang untuk mengubah ide, masalah, atau proses manual menjadi kebutuhan yang jelas. Kami bantu menentukan prioritas dan bentuk solusi sebelum development dimulai.</p></div>
+                    </details>
+                    <details class="faq-item reveal">
+                        <summary>
+                            <span data-i18n="faq.q2">Berapa lama waktu pengembangannya?</span>
+                            <i aria-hidden="true"></i>
+                        </summary>
+                        <div><p data-i18n="faq.a2">Tergantung scope, integrasi, dan tingkat kompleksitas. Setelah sesi awal, kami akan menyusun fase dan estimasi yang realistis. Proyek dapat dimulai dari MVP terarah lalu dikembangkan bertahap.</p></div>
+                    </details>
+                    <details class="faq-item reveal">
+                        <summary>
+                            <span data-i18n="faq.q3">Apakah RNQ bisa melanjutkan atau memperbaiki sistem yang sudah ada?</span>
+                            <i aria-hidden="true"></i>
+                        </summary>
+                        <div><p data-i18n="faq.a3">Bisa. Kami dapat melakukan technical audit lebih dulu untuk memahami kualitas codebase, risiko, infrastruktur, dan pilihan terbaik: memperbaiki, memodernisasi bertahap, atau membangun ulang bagian tertentu.</p></div>
+                    </details>
+                    <details class="faq-item reveal">
+                        <summary>
+                            <span data-i18n="faq.q4">Apakah ada dukungan setelah sistem diluncurkan?</span>
+                            <i aria-hidden="true"></i>
+                        </summary>
+                        <div><p data-i18n="faq.a4">Ada. Bentuknya dapat berupa masa stabilisasi, maintenance, monitoring, perbaikan, maupun roadmap pengembangan lanjutan—disesuaikan dengan kebutuhan operasional Anda.</p></div>
+                    </details>
+                    <details class="faq-item reveal">
+                        <summary>
+                            <span data-i18n="faq.q5">Bagaimana cara mendapat estimasi biaya?</span>
+                            <i aria-hidden="true"></i>
+                        </summary>
+                        <div><p data-i18n="faq.a5">Mulai dengan konsultasi singkat melalui WhatsApp. Ceritakan masalah, target pengguna, fitur utama, dan target waktu jika ada. Setelah ruang lingkup cukup jelas, kami siapkan pendekatan dan estimasi yang transparan.</p></div>
+                    </details>
+                </div>
             </div>
+        </section>
 
-            {{-- Mobile menu panel --}}
-            <div x-show="mobileMenu"
-                 x-cloak
-                 x-transition:enter="transition ease-out duration-200"
-                 x-transition:enter-start="opacity-0"
-                 x-transition:enter-end="opacity-100"
-                 x-transition:leave="transition ease-in duration-150"
-                 x-transition:leave-start="opacity-100"
-                 x-transition:leave-end="opacity-0"
-                 class="flex flex-col gap-1 border-t border-gray-100 pb-4 pt-3 md:hidden">
-                <a href="#features" @click="mobileMenu = false" class="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600">Fitur</a>
-                <a href="#quickstart" @click="mobileMenu = false" class="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600">Quick Start</a>
-                <a href="/articles" @click="mobileMenu = false" class="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600">Berita AI</a>
-                <a href="/docs/api" class="rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 transition-colors hover:bg-blue-50 hover:text-blue-600">API Docs</a>
-                <a href="/admin" class="mt-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-blue-700">
-                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
-                    </svg>
-                    Admin Panel
+        <section class="cta-section">
+            <div class="cta-grid" aria-hidden="true"></div>
+            <div class="cta-orb" aria-hidden="true"></div>
+            <div class="container cta-content">
+                <div class="cta-status reveal">
+                    <span class="status-dot"></span>
+                    <span data-i18n="cta.eyebrow">IDE ANDA, LANGKAH BERIKUTNYA</span>
+                </div>
+                <h2 class="reveal">
+                    <span data-i18n="cta.titleLead">Punya masalah yang</span>
+                    <em data-i18n="cta.titleAccent">layak diselesaikan?</em>
+                </h2>
+                <p class="reveal" data-i18n="cta.description">Mari bicarakan konteksnya. Kami akan membantu melihat apakah web, mobile, IoT—atau kombinasi ketiganya—adalah langkah yang paling tepat.</p>
+                <a class="button button-primary button-large magnetic reveal"
+                   href="https://wa.me/6281818173095?text=Halo%20RNQ%20Studio%2C%20saya%20ingin%20mendiskusikan%20ide%20atau%20kebutuhan%20sistem."
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   data-whatsapp>
+                    <span data-i18n="cta.button">Mulai Percakapan di WhatsApp</span>
+                    <span class="button-arrow" aria-hidden="true">↗</span>
                 </a>
+                <small class="reveal" data-i18n="cta.note">Tidak perlu brief sempurna. Mulai saja dari masalah yang ingin Anda selesaikan.</small>
             </div>
-        </div>
-    </nav>
+        </section>
+    </main>
 
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    {{-- HERO SECTION                                                  --}}
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    <section class="relative overflow-hidden pt-32 pb-20 lg:pt-40 lg:pb-28" style="background: linear-gradient(135deg, #f9fafb 0%, #eff6ff 50%, #f9fafb 100%);">
-        {{-- Subtle decorative dots --}}
-        <div class="absolute inset-0" style="opacity: 0.03; background-image: radial-gradient(circle, #2563eb 1px, transparent 1px); background-size: 24px 24px;"></div>
-
-        <div class="relative mx-auto max-w-6xl px-6 text-center lg:px-8">
-            {{-- Badge --}}
-            <div class="animate-fade-in-up mb-8 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-blue-50 px-4 py-1.5">
-                <span class="h-2 w-2 rounded-full bg-blue-500" style="animation: pulse 2s cubic-bezier(.4,0,.6,1) infinite;"></span>
-                <span class="text-sm font-medium text-blue-700">Laravel 13 + Filament 5 + Passport OAuth2</span>
-            </div>
-
-            {{-- Headline --}}
-            <h1 class="animate-fade-in-up delay-100 mx-auto max-w-4xl text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl" style="line-height: 1.1;">
-                Fondasi Backend yang
-                <span style="background: linear-gradient(to right, #2563eb, #1d4ed8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Siap Produksi</span>
-            </h1>
-
-            {{-- Subheadline --}}
-            <p class="animate-fade-in-up delay-200 mx-auto mt-6 max-w-2xl text-lg text-gray-500 sm:text-xl" style="line-height: 1.7;">
-                Starter project berbasis Laravel &amp; PostgreSQL — dirancang sebagai fondasi <strong class="text-gray-700">API backend untuk Flutter</strong> dan <strong class="text-gray-700">back-office web UI</strong> dengan Filament.
-                Bersih, konsisten, dan siap dikembangkan.
-            </p>
-
-            {{-- CTA Buttons --}}
-            <div class="animate-fade-in-up delay-300 mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <a href="/admin" class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-7 py-3.5 text-base font-semibold text-white shadow-lg transition-all hover:bg-blue-700 hover:shadow-xl" style="box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.35);">
-                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-                    </svg>
-                    Buka Admin Panel
+    <footer class="site-footer">
+        <div class="container footer-main">
+            <div class="footer-brand">
+                <a class="brand" href="#top" aria-label="RNQ Studio — Home">
+                    <span class="brand-mark">
+                        <img src="{{ asset('images/logo-dark.svg') }}" alt="" width="42" height="42">
+                    </span>
+                    <span class="brand-copy">
+                        <strong>RNQ</strong>
+                        <span>STUDIO</span>
+                    </span>
                 </a>
-                <a href="/docs/api" class="inline-flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-7 py-3.5 text-base font-semibold text-gray-700 shadow-sm transition-all hover:border-gray-300 hover:bg-gray-50 hover:shadow-md">
-                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                    </svg>
-                    Lihat API Docs
-                </a>
+                <p data-i18n="footer.tagline">Merancang teknologi yang bekerja untuk manusia, bisnis, dan dunia yang terhubung.</p>
             </div>
-
-            {{-- Tech pills --}}
-            <div class="animate-fade-in-up delay-400 mt-12 flex flex-wrap items-center justify-center gap-3">
-                @foreach (['Laravel 13', 'PHP 8.3+', 'PostgreSQL', 'Filament 5', 'Passport OAuth2', 'Spatie RBAC', 'Redis'] as $tech)
-                    <span class="rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-medium text-gray-500">{{ $tech }}</span>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    {{-- FEATURES SECTION                                              --}}
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    <section id="features" class="bg-white py-20 lg:py-28">
-        <div class="mx-auto max-w-6xl px-6 lg:px-8">
-            {{-- Section header --}}
-            <div class="mb-16 text-center">
-                <span class="mb-4 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-600">Fitur Unggulan</span>
-                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Semua yang Anda Butuhkan, Sudah Tersedia</h2>
-                <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-500">Satu starter project dengan arsitektur yang bersih, fitur enterprise-grade, dan konvensi yang konsisten.</p>
-            </div>
-
-            {{-- Feature cards grid --}}
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
-                {{-- Feature 1: API-First Backend --}}
-                <div class="feature-card rounded-2xl border border-gray-100 p-7" style="background-color: rgba(249,250,251,0.5);">
-                    <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50">
-                        <svg class="h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
-                        </svg>
-                    </div>
-                    <h3 class="mb-2 text-lg font-bold text-gray-900">API-First Backend</h3>
-                    <p class="text-sm leading-relaxed text-gray-500">Token-based authentication via OAuth2 (Laravel Passport) dengan format JSON response yang konsisten — siap dikonsumsi oleh Flutter client.</p>
+            <div class="footer-links">
+                <div>
+                    <span data-i18n="footer.explore">JELAJAHI</span>
+                    <a href="#services" data-i18n="nav.services">Layanan</a>
+                    <a href="#solutions" data-i18n="nav.solutions">Solusi</a>
+                    <a href="#process" data-i18n="nav.process">Proses</a>
+                    <a href="#faq">FAQ</a>
                 </div>
-
-                {{-- Feature 2: Filament Back-office --}}
-                <div class="feature-card rounded-2xl border border-gray-100 p-7" style="background-color: rgba(249,250,251,0.5);">
-                    <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50">
-                        <svg class="h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
-                        </svg>
-                    </div>
-                    <h3 class="mb-2 text-lg font-bold text-gray-900">Filament Admin Panel</h3>
-                    <p class="text-sm leading-relaxed text-gray-500">Back-office UI lengkap berbasis Filament 5 untuk user management, role &amp; permission, dan CRUD data master — tanpa perlu coding UI sendiri.</p>
-                </div>
-
-                {{-- Feature 3: RBAC Spatie --}}
-                <div class="feature-card rounded-2xl border border-gray-100 p-7" style="background-color: rgba(249,250,251,0.5);">
-                    <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-50">
-                        <svg class="h-5 w-5 text-emerald-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                        </svg>
-                    </div>
-                    <h3 class="mb-2 text-lg font-bold text-gray-900">RBAC Terpadu (Spatie)</h3>
-                    <p class="text-sm leading-relaxed text-gray-500">Satu sistem role &amp; permission (spatie/laravel-permission) yang dipakai bersama oleh API guard dan web guard — single source of truth.</p>
-                </div>
-
-                {{-- Feature 4: API Docs (Scramble) --}}
-                <div class="feature-card rounded-2xl border border-gray-100 p-7" style="background-color: rgba(249,250,251,0.5);">
-                    <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50">
-                        <svg class="h-5 w-5 text-amber-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-                        </svg>
-                    </div>
-                    <h3 class="mb-2 text-lg font-bold text-gray-900">API Docs Interaktif</h3>
-                    <p class="text-sm leading-relaxed text-gray-500">Dokumentasi API auto-generated oleh Scramble dengan OpenAPI spec — tersedia di <code style="font-size: 0.75rem; background: #f3f4f6; padding: 2px 6px; border-radius: 4px;">/docs/api</code> saat environment local.</p>
-                </div>
-
-                {{-- Feature 5: Firebase Push Notification --}}
-                <div class="feature-card rounded-2xl border border-gray-100 p-7" style="background-color: rgba(249,250,251,0.5);">
-                    <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-rose-50">
-                        <svg class="h-5 w-5 text-rose-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-                        </svg>
-                    </div>
-                    <h3 class="mb-2 text-lg font-bold text-gray-900">Firebase Push Notification</h3>
-                    <p class="text-sm leading-relaxed text-gray-500">Integrasi Firebase Cloud Messaging (FCM) untuk pengiriman push notification asinkron ke Flutter client melalui queue worker.</p>
-                </div>
-
-                {{-- Feature 6: Database Wilayah Indonesia --}}
-                <div class="feature-card rounded-2xl border border-gray-100 p-7" style="background-color: rgba(249,250,251,0.5);">
-                    <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50">
-                        <svg class="h-5 w-5 text-sky-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                        </svg>
-                    </div>
-                    <h3 class="mb-2 text-lg font-bold text-gray-900">Wilayah Global</h3>
-                    <p class="text-sm leading-relaxed text-gray-500">Database 249.036 data administratif global (seluruh negara di dunia) dengan offline seeding via JSON fixtures.</p>
-                </div>
-
-                {{-- Feature 7: Asset Management & GCS Storage --}}
-                <div class="feature-card rounded-2xl border border-gray-100 p-7" style="background-color: rgba(249,250,251,0.5);">
-                    <div class="mb-5 flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50">
-                        <svg class="h-5 w-5 text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 16.5V9.75m0 0 3 3m-3-3-3 3M6.75 19.5a4.5 4.5 0 0 1-1.41-8.775 5.25 5.25 0 0 1 10.233-2.33 3 3 0 0 1 3.758 3.848A3.752 3.752 0 0 1 18 19.5H6.75Z" />
-                        </svg>
-                    </div>
-                    <h3 class="mb-2 text-lg font-bold text-gray-900">Manajemen Aset & GCS</h3>
-                    <p class="text-sm leading-relaxed text-gray-500">Unggah file transaksional secara atomik ke Google Cloud Storage dengan enkapsulasi UUID, dedup checksum sha256, ekstraksi metadata gambar/PDF otomatis, dan pembersihan 2-fase harian.</p>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    {{-- QUICK START SECTION                                           --}}
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    <section id="quickstart" class="bg-gray-50 py-20 lg:py-28">
-        <div class="mx-auto max-w-6xl px-6 lg:px-8">
-            <div class="mb-16 text-center">
-                <span class="mb-4 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-600">Memulai Cepat</span>
-                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Siap dalam 12 Menit</h2>
-                <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-500">Clone repository, jalankan empat perintah berikut, dan langsung mulai develop.</p>
-            </div>
-
-            <div class="mx-auto max-w-3xl">
-                {{-- Terminal-style code block --}}
-                <div class="overflow-hidden rounded-2xl border border-gray-800 shadow-xl" style="background: #1e1e2e;">
-                    {{-- Terminal header --}}
-                    <div class="flex items-center gap-2 border-b border-gray-700 px-5 py-3">
-                        <span class="h-3 w-3 rounded-full" style="background: #ff5f57;"></span>
-                        <span class="h-3 w-3 rounded-full" style="background: #febc2e;"></span>
-                        <span class="h-3 w-3 rounded-full" style="background: #28c840;"></span>
-                        <span class="ml-3 text-xs text-gray-400">Terminal</span>
-                    </div>
-                    {{-- Code content --}}
-                    <div class="p-6 font-mono text-sm leading-7" style="color: #cdd6f4;">
-                        <div>
-                            <span style="color: #6c7086;"># Langkah 1 — Install dependensi & build assets (Membuat .env)</span>
-                        </div>
-                        <div>
-                            <span style="color: #a6e3a1;">$</span> <span>composer run setup</span>
-                        </div>
-                        <div class="mt-4">
-                            <span style="color: #6c7086;"># Langkah 2 — Konfigurasi kredensial database Anda di file .env</span>
-                        </div>
-                        <div class="mt-4">
-                            <span style="color: #6c7086;"># Langkah 3 — Migrasi database & seed data awal</span>
-                        </div>
-                        <div>
-                            <span style="color: #a6e3a1;">$</span> <span>php artisan migrate:fresh --seed</span>
-                        </div>
-                        <div class="mt-4">
-                            <span style="color: #6c7086;"># Langkah 4 — Kunci Passport & Storage Symlink</span>
-                        </div>
-                        <div>
-                            <span style="color: #a6e3a1;">$</span> <span>php artisan passport:keys --force</span>
-                        </div>
-                        <div>
-                            <span style="color: #a6e3a1;">$</span> <span>php artisan storage:link</span>
-                        </div>
-                        <div class="mt-4">
-                            <span style="color: #6c7086;"># Langkah 5 — Buat Password Client (Salin Secret ke .env!)</span>
-                        </div>
-                        <div>
-                            <span style="color: #a6e3a1;">$</span> <span>php artisan passport:client --password</span>
-                        </div>
-                        <div class="mt-4">
-                            <span style="color: #6c7086;"># Langkah 6 — Unduh & jalankan seeder wilayah global offline</span>
-                        </div>
-                        <div>
-                            <span style="color: #a6e3a1;">$</span> <span>php artisan regions:download</span>
-                        </div>
-                        <div>
-                            <span style="color: #a6e3a1;">$</span> <span>php artisan db:seed --class=RegionSeeder</span>
-                        </div>
-                        <div class="mt-4">
-                            <span style="color: #6c7086;"># Langkah 7 — Jalankan server dev lokal</span>
-                        </div>
-                        <div>
-                            <span style="color: #a6e3a1;">$</span> <span>composer run dev</span>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- Notes below terminal --}}
-                <div class="mt-6 flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-6">
-                    <div class="flex items-start gap-2">
-                        <svg class="mt-0.5 h-4 w-4 shrink-0 text-amber-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-                        </svg>
-                        <p class="text-xs text-gray-500">Simpan <strong class="text-gray-700">Client ID</strong> &amp; <strong class="text-gray-700">Client Secret</strong> dari Passport ke <code style="font-size: 0.7rem; background: #f3f4f6; padding: 1px 5px; border-radius: 3px;">.env</code></p>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <svg class="mt-0.5 h-4 w-4 shrink-0 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
-                        </svg>
-                        <p class="text-xs text-gray-500">Untuk Docker, gunakan <code style="font-size: 0.7rem; background: #f3f4f6; padding: 1px 5px; border-radius: 3px;">./vendor/bin/sail</code> — lihat detail di README</p>
-                    </div>
+                <div>
+                    <span data-i18n="footer.contact">KONTAK</span>
+                    <a href="https://wa.me/6281818173095?text=Halo%20RNQ%20Studio%2C%20saya%20ingin%20konsultasi."
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       data-whatsapp>WhatsApp ↗</a>
+                    <a href="/articles" data-i18n="footer.insights">Insights</a>
                 </div>
             </div>
         </div>
-    </section>
-
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    {{-- ACCESS POINTS & CREDENTIALS SECTION                           --}}
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    <section id="access" class="bg-white py-20 lg:py-28">
-        <div class="mx-auto max-w-6xl px-6 lg:px-8">
-            <div class="mb-16 text-center">
-                <span class="mb-4 inline-block rounded-full bg-blue-50 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-blue-600">Akses Aplikasi</span>
-                <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Endpoint yang Tersedia</h2>
-                <p class="mx-auto mt-4 max-w-2xl text-lg text-gray-500">Setelah server dev berjalan, akses layanan berikut di browser.</p>
-            </div>
-
-            {{-- Access Points Grid --}}
-            <div class="mx-auto grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-2">
-                {{-- Landing Page --}}
-                <a href="/" class="group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 p-5 transition-all hover:border-blue-200 hover:bg-blue-50">
-                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm">
-                        <svg class="h-5 w-5 text-gray-400 transition-colors group-hover:text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-gray-900">Landing Page</p>
-                        <p class="text-xs text-gray-400">localhost:8000</p>
-                    </div>
-                </a>
-
-                {{-- Admin Panel --}}
-                <a href="/admin" class="group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 p-5 transition-all hover:border-blue-200 hover:bg-blue-50">
-                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm">
-                        <svg class="h-5 w-5 text-gray-400 transition-colors group-hover:text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-gray-900">Admin Panel (Filament)</p>
-                        <p class="text-xs text-gray-400">localhost:8000/admin</p>
-                    </div>
-                </a>
-
-                {{-- API Docs --}}
-                <a href="/docs/api" class="group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 p-5 transition-all hover:border-blue-200 hover:bg-blue-50">
-                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm">
-                        <svg class="h-5 w-5 text-gray-400 transition-colors group-hover:text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-gray-900">API Docs (Scramble)</p>
-                        <p class="text-xs text-gray-400">localhost:8000/docs/api</p>
-                    </div>
-                </a>
-
-                {{-- Berita AI (Public Blog) --}}
-                <a href="/articles" class="group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 p-5 transition-all hover:border-blue-200 hover:bg-blue-50">
-                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm">
-                        <svg class="h-5 w-5 text-gray-400 transition-colors group-hover:text-blue-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 18V6.125c0-.621.504-1.125 1.125-1.125H9.75M8.25 21h8.25" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-gray-900">Berita AI &amp; Blog (Tanpa Login)</p>
-                        <p class="text-xs text-gray-400">localhost:8000/articles</p>
-                    </div>
-                </a>
-
-                {{-- Health Check --}}
-                <a href="/api/v1/health" class="group flex items-center gap-4 rounded-xl border border-gray-100 bg-gray-50 p-5 transition-all hover:border-blue-200 hover:bg-blue-50">
-                    <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white shadow-sm">
-                        <svg class="h-5 w-5 text-gray-400 transition-colors group-hover:text-emerald-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-                        </svg>
-                    </div>
-                    <div>
-                        <p class="text-sm font-semibold text-gray-900">Health Check API</p>
-                        <p class="text-xs text-gray-400">localhost:8000/api/v1/health</p>
-                    </div>
-                </a>
-            </div>
-
-            {{-- Default Credentials --}}
-            <div class="mx-auto mt-10 max-w-4xl">
-                <div class="rounded-xl border border-blue-100 p-6" style="background: linear-gradient(135deg, #eff6ff 0%, #eff6ff 100%);">
-                    <div class="flex items-start gap-3">
-                        <svg class="mt-0.5 h-5 w-5 shrink-0 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 0 1 3 3m3 0a6 6 0 0 1-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1 1 21.75 8.25Z" />
-                        </svg>
-                        <div>
-                            <p class="text-sm font-semibold text-gray-900">Kredensial Default (Seeder)</p>
-                            <p class="mt-1 text-sm text-gray-600">
-                                Email: <code style="font-size: 0.8rem; background: rgba(255,255,255,0.7); padding: 2px 8px; border-radius: 4px; font-weight: 600;">admin@example.com</code>
-                                &nbsp;·&nbsp;
-                                Password: <code style="font-size: 0.8rem; background: rgba(255,255,255,0.7); padding: 2px 8px; border-radius: 4px; font-weight: 600;">password</code>
-                                &nbsp;·&nbsp;
-                                Role: <span class="font-medium text-blue-600">super-admin</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    {{-- FOOTER                                                        --}}
-    {{-- ══════════════════════════════════════════════════════════════ --}}
-    <footer class="border-t border-gray-100 bg-gray-50">
-        <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 py-10 sm:flex-row lg:px-8">
-            <p class="text-sm text-gray-400">
-                Laravel Starter &mdash; v{{ app()->version() }}
-            </p>
-            <div class="flex items-center gap-6">
-                <a href="/admin" class="text-sm text-gray-500 transition-colors hover:text-blue-600">Admin Panel</a>
-                <a href="/docs/api" class="text-sm text-gray-500 transition-colors hover:text-blue-600">API Docs</a>
-                <a href="https://laravel.com/docs" target="_blank" rel="noopener" class="text-sm text-gray-500 transition-colors hover:text-blue-600">Laravel Docs</a>
-            </div>
+        <div class="container footer-bottom">
+            <p>© {{ date('Y') }} RNQ Studio. <span data-i18n="footer.rights">Hak cipta dilindungi.</span></p>
+            <p data-i18n="footer.signature">Built with clarity. Engineered for impact.</p>
         </div>
     </footer>
 
-    {{-- Alpine.js (lightweight, for mobile menu toggle only) --}}
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
+    <a class="floating-whatsapp"
+       href="https://wa.me/6281818173095?text=Halo%20RNQ%20Studio%2C%20saya%20ingin%20konsultasi%20tentang%20pengembangan%20sistem."
+       target="_blank"
+       rel="noopener noreferrer"
+       data-whatsapp
+       aria-label="Hubungi RNQ Studio melalui WhatsApp">
+        <span class="whatsapp-ripple" aria-hidden="true"></span>
+        <span class="whatsapp-icon" aria-hidden="true">WA</span>
+        <span class="whatsapp-label" data-i18n="floating.label">Hubungi Kami</span>
+    </a>
 </body>
 </html>
